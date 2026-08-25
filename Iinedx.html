@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>정보경 연애 운세</title>
+
+    <style>
+        /* =========================
+           기본 설정
+        ========================= */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family:
+                "Pretendard",
+                "Noto Sans KR",
+                Arial,
+                sans-serif;
+
+            background:
+                radial-gradient(circle at top, #fff 0%, transparent 40%),
+                linear-gradient(135deg, #ffd6e4, #fff0f5);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: #333;
+        }
+
+
+        /* =========================
+           메인 카드
+        ========================= */
+        .container {
+            width: 90%;
+            max-width: 520px;
+
+            padding: 45px 30px;
+
+            background: rgba(255, 255, 255, 0.95);
+
+            border-radius: 30px;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 60px rgba(255, 79, 129, 0.18);
+
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+
+        /* =========================
+           제목
+        ========================= */
+        h1 {
+            margin: 0 0 12px;
+
+            font-size: 32px;
+
+            color: #ff4f81;
+        }
+
+        .subtitle {
+            margin: 0;
+
+            color: #777;
+
+            font-size: 17px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           동전 영역
+        ========================= */
+        .coin-area {
+            margin: 35px 0 20px;
+        }
+
+        .coin {
+            width: 190px;
+            height: 190px;
+
+            margin: 0 auto;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #fff4a3,
+                    #ffd700 35%,
+                    #f5a900 70%,
+                    #d88b00 100%
+                );
+
+            border: 8px solid #e4a000;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 75px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 0 #c98700,
+                0 20px 35px rgba(0, 0, 0, 0.18);
+
+            transition: transform 0.2s ease;
+
+            user-select: none;
+
+            perspective: 1000px;
+        }
+
+        .coin:hover {
+            transform: scale(1.05);
+        }
+
+        .coin:active {
+            transform: scale(0.95);
+        }
+
+
+        /* =========================
+           동전 회전 애니메이션
+        ========================= */
+        .coin.flipping {
+            animation: coinFlip 0.9s ease-in-out;
+        }
+
+        @keyframes coinFlip {
+
+            0% {
+                transform: rotateY(0deg) scale(1);
+            }
+
+            25% {
+                transform: rotateY(450deg) scale(1.08);
+            }
+
+            50% {
+                transform: rotateY(900deg) scale(1.15);
+            }
+
+            75% {
+                transform: rotateY(1350deg) scale(1.08);
+            }
+
+            100% {
+                transform: rotateY(1800deg) scale(1);
+            }
+        }
+
+
+        /* =========================
+           안내 문구
+        ========================= */
+        .instruction {
+            margin-top: 22px;
+
+            color: #888;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           결과 영역
+        ========================= */
+        .result {
+            min-height: 145px;
+
+            margin-top: 20px;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+        }
+
+        .result-text {
+            color: #666;
+
+            font-size: 18px;
+        }
+
+        .days {
+            font-size: 65px;
+
+            font-weight: 900;
+
+            color: #ff3f78;
+
+            line-height: 1;
+
+            animation: resultAppear 0.5s ease;
+        }
+
+        .days span {
+            font-size: 32px;
+        }
+
+        .message {
+            margin-top: 15px;
+
+            font-size: 19px;
+
+            font-weight: 700;
+
+            color: #444;
+
+            animation: resultAppear 0.7s ease;
+        }
+
+        @keyframes resultAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(15px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+
+        /* =========================
+           버튼
+        ========================= */
+        .button {
+            margin-top: 10px;
+
+            padding: 14px 30px;
+
+            border: none;
+
+            border-radius: 30px;
+
+            background: #ff4f81;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: all 0.2s ease;
+        }
+
+        .button:hover {
+            background: #e83e6f;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(255, 79, 129, 0.25);
+        }
+
+        .button:active {
+            transform: scale(0.96);
+        }
+
+
+        /* =========================
+           하단 문구
+        ========================= */
+        .footer {
+            margin-top: 30px;
+
+            font-size: 12px;
+
+            color: #aaa;
+        }
+
+
+        /* =========================
+           모바일 대응
+        ========================= */
+        @media (max-width: 600px) {
+
+            .container {
+                padding: 35px 20px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+
+            .subtitle {
+                font-size: 15px;
+            }
+
+            .coin {
+                width: 160px;
+                height: 160px;
+
+                font-size: 60px;
+            }
+
+            .days {
+                font-size: 55px;
+            }
+
+            .message {
+                font-size: 17px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <main class="container">
+
+        <!-- 제목 -->
+        <h1>❤️ 정보경 연애 운세 ❤️</h1>
+
+        <p class="subtitle">
+            정보경은 남자친구와<br>
+            과연 며칠이나 사귈까?
+        </p>
+
+
+        <!-- 동전 -->
+        <div class="coin-area">
+
+            <div
+                class="coin"
+                id="coin"
+                onclick="flipCoin()"
+                title="동전을 클릭하세요!"
+            >
+                🪙
+            </div>
+
+        </div>
+
+
+        <p class="instruction">
+            🪙 동전을 클릭해서 운명을 확인해보세요!
+        </p>
+
+
+        <!-- 결과 -->
+        <div class="result" id="result">
+
+            <div class="result-text">
+                결과가 여기에 나타납니다 💕
+            </div>
+
+        </div>
+
+
+        <!-- 버튼 -->
+        <button
+            class="button"
+            onclick="flipCoin()"
+        >
+            🔮 다시 운세 보기
+        </button>
+
+
+        <div class="footer">
+            ※ 재미로 보는 연애 운세입니다 😆
+        </div>
+
+    </main>
+
+
+    <script>
+
+        /* =========================
+           연애 운세 실행 함수
+        ========================= */
+
+        function flipCoin() {
+
+            const coin =
+                document.getElementById("coin");
+
+            const result =
+                document.getElementById("result");
+
+
+            // 동전이 이미 돌고 있다면 실행하지 않음
+            if (coin.classList.contains("flipping")) {
+                return;
+            }
+
+
+            // 동전 애니메이션 시작
+            coin.classList.remove("flipping");
+
+            // 브라우저가 애니메이션을 다시 인식하도록 함
+            void coin.offsetWidth;
+
+            coin.classList.add("flipping");
+
+
+            // 결과를 계산하는 동안 문구 변경
+            result.innerHTML = `
+                <div class="result-text">
+                    💫 운명을 계산하는 중...
+                </div>
+            `;
+
+
+            /*
+                0.9초 후 결과 출력
+                1 ~ 100 사이의 숫자를 랜덤으로 생성
+            */
+
+            setTimeout(function() {
+
+                const days =
+                    Math.floor(Math.random() * 100) + 1;
+
+
+                let message;
+
+
+                // 숫자에 따라 재미있는 메시지 출력
+
+                if (days <= 10) {
+
+                    message =
+                        "앗... 조금 더 노력해야겠어요 😂";
+
+                }
+
+                else if (days <= 30) {
+
+                    message =
+                        "그래도 한 달은 간다! 💕";
+
+                }
+
+                else if (days <= 60) {
+
+                    message =
+                        "오오! 꽤 오래 가는데요? 😍";
+
+                }
+
+                else if (days <= 90) {
+
+                    message =
+                        "장기 연애의 기운이 보입니다! 💖";
+
+                }
+
+                else {
+
+                    message =
+                        "이 정도면 거의 운명입니다! 💍❤️";
+
+                }
+
+
+                // 결과 표시
+
+                result.innerHTML = `
+                    <div class="days">
+                        ${days}<span>일</span>
+                    </div>
+
+                    <div class="message">
+                        ${message}
+                    </div>
+                `;
+
+
+            }, 900);
+
+        }
+
+    </script>
+
+</body>
+</html>
